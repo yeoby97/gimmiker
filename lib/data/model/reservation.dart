@@ -57,6 +57,7 @@ class Reservation {
 }
 
 class ReservationData{
+  final String id;
   final Warehouse warehouse;
   final Space space;
   final AppUser user;
@@ -65,8 +66,8 @@ class ReservationData{
   final DateTime endAt;
   final DateTime createdAt;
 
-
   ReservationData({
+    required this.id,
     required this.warehouse,
     required this.space,
     required this.user,

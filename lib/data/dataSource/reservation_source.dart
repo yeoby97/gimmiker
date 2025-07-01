@@ -4,6 +4,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../model/reservation.dart';
+import '../model/user.dart';
 
 class ReservationSource{
 
@@ -25,5 +26,21 @@ class ReservationSource{
       reservations.add(Reservation.fromDoc(doc));
     }
     return reservations;
+  }
+
+  Future<void> eraseReservation(ReservationData reservationData)async{
+    await _firestore.collection("reservations").doc(reservationData.id).delete();
+    final ownerDoc = await _firestore.collection("users").doc(reservationData.owner.uid).get();
+    AppUser user = AppUser.fromMap(ownerDoc.data()!);
+    final userDoc = await _firestore.collection("users").doc(reservationData.user.uid).get();
+    AppUser owner = AppUser.fromMap(userDoc.data()!);
+    user.myReservations!.remove(reservationData.id);
+    owner.receivedReservations!.remove(reservationData.id);
+    await _firestore.collection("users").doc(reservationData.user.uid).update({
+      "myReservations": user.myReservations
+    });
+    await _firestore.collection("users").doc(reservationData.owner.uid).update({
+      "receivedReservations": owner.receivedReservations
+    });
   }
 }

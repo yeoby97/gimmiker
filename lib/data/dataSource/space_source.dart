@@ -34,4 +34,14 @@ class SpaceSource{
           .add(space.toMap());
     }
   }
+  Future<void> updateSpace(Warehouse warehouse,Space space) async {
+    await _firestore
+        .collection('locations')
+        .doc(warehouse.locationId)
+        .collection('warehouses')
+        .doc(warehouse.id)
+        .collection('containers')
+        .doc(space.id)
+        .update(space.toMap());
+  }
 }

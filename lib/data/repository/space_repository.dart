@@ -14,8 +14,10 @@ class SpaceRepository{
   Future<List<Space>> getAllSpaces(Warehouse warehouse) async {
     return _spaceSource.getAllSpaces(warehouse);
   }
-
   Future<void> addAllSpaces(Warehouse warehouse, List<Space> spaces) async {
     await _spaceSource.addAllSpaces(warehouse, spaces);
+  }
+  Future<void> updateSpace(Warehouse warehouse, Space space) async {
+    await _spaceSource.updateSpace(warehouse,space);
   }
 }

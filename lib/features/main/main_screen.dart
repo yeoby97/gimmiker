@@ -38,8 +38,9 @@ class _Body extends StatelessWidget {
       0 => const HomeScreen(),
       1 => const MyWarehouseScreen(),
       2 => const Center(child: Text('예약현황')),
-      3 => const Center(child: Text('내 정보')),
-      4 => const ManagerWarehouseManagementScreen(),
+      3 => const Center(child: Text('예약현황')),
+      4 => const Center(child: Text('내 정보')),
+      5 => const ManagerWarehouseManagementScreen(),
       _ => const Center(child: Text('오류')),
     };
   }
@@ -64,10 +65,11 @@ class _FloatingButton extends StatelessWidget {
         _buildDial(icon: Icons.home, label: '홈', tab: 0, context: context),
         _buildDial(icon: Icons.warehouse, label: '내 창고', tab: 1, context: context),
         _buildDial(icon: Icons.calendar_month, label: '예약현황', tab: 2, context: context),
-        _buildDial(icon: Icons.person, label: '내 정보', tab: 3, context: context),
+        _buildDial(icon: Icons.person, label: '이용중', tab: 3, context: context),
+        _buildDial(icon: Icons.person, label: '내 정보', tab: 4, context: context),
         if(mainProvider.currentUser != null &&
             mainProvider.currentUser!.userType == UserType.manager)
-          _buildDial(icon: Icons.add_card, label: '창고관리', tab: 4, context: context),
+          _buildDial(icon: Icons.add_card, label: '창고관리', tab: 5, context: context),
       ],
     );
   }

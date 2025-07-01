@@ -26,4 +26,7 @@ class UserRepository{
   Future<void> updateUser(AppUser user)async{
     await _userSource.updateUser(user);
   }
+  Future<void> addUsingSpace(String userId,UsingSpace usingSpace)async{
+    await _userSource.addUsingSpace(userId, usingSpace);
+  }
 }

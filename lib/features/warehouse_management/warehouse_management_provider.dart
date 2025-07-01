@@ -1,10 +1,7 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:gimmiker/data/model/reservation.dart';
 import 'package:gimmiker/data/repository/user_repository.dart';
 import 'package:provider/provider.dart';
-
 import '../../data/dataSource/reservation_source.dart';
 import '../../data/dataSource/space_source.dart';
 import '../../data/dataSource/user_source.dart';
@@ -23,7 +20,6 @@ class WarehouseManagementProvider extends ChangeNotifier{
   final reservationRepository = ReservationRepository(ReservationSource());
   final userRepository = UserRepository(UserSource());
   final warehouseRepository = WarehouseRepository(WarehouseSource());
-
 
   List<Space>? spaces;
   List<Reservation> reservations = [];
@@ -50,6 +46,7 @@ class WarehouseManagementProvider extends ChangeNotifier{
       final owner = await userRepository.getUser(reservation.ownerId);
 
       reservationsData.add(ReservationData(
+        id: reservation.id!,
         warehouse: warehouse,
         space: space,
         user: user,
@@ -62,5 +59,27 @@ class WarehouseManagementProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+  void approve(ReservationData reservationData){
+    Space space = reservationData.space;
+    space.user = reservationData.user.uid;
+    space.usingStart = reservationData.startAt;
+    space.usingEnd = reservationData.endAt;
+    spaceRepository.updateSpace(reservationData.warehouse, space);
 
+    final index = spaces!.indexWhere((s) => s.id == space.id);
+
+    if (index != -1) {
+      spaces![index] = space;
+    }
+
+    reservationRepository.eraseReservation(reservationData);
+    reservationsData.remove(reservationData);
+    userRepository.addUsingSpace(reservationData.user.uid, UsingSpace(
+      locationId: reservationData.warehouse.locationId,
+      warehouseId: reservationData.warehouse.id,
+      spaceId: reservationData.space.id,
+    ));
+
+    notifyListeners();
+  }
 }

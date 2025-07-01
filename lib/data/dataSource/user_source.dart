@@ -38,4 +38,12 @@ class UserSource{
   Future<void> updateUser(AppUser user)async{
     await _firestore.collection("users").doc(user.uid).set(user.toMap());
   }
+
+  Future<void> addUsingSpace(String userId,UsingSpace usingSpace)async{
+    AppUser? user = await getUser(userId);
+    if(user == null) return;
+    user.usingSpaces!.add(usingSpace);
+    await updateUser(user);
+    await updateUser(user);
+  }
 }

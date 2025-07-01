@@ -9,6 +9,7 @@ class AppUser {
   final String phoneNumber; // 휴대폰번호
   final bool advertisement; // 광고 수신 여부
   final List<MyWarehouse>? myWarehouses;
+  final List<UsingSpace>? usingSpaces;
   final List<String>? myReservations;
   final List<String>? receivedReservations;
   final UserType userType;
@@ -22,6 +23,7 @@ class AppUser {
     required this.advertisement,
     required this.userType,
     this.myWarehouses,
+    this.usingSpaces,
     this.myReservations,
     this.receivedReservations,
   });
@@ -35,6 +37,7 @@ class AppUser {
       'phoneNumber': phoneNumber,
       'advertisement': advertisement,
       'myWarehouses': myWarehouses?.map((e) => e.toMap()).toList(),
+      'usingWarehouses': usingSpaces?.map((e) => e.toMap()).toList(),
       'myReservations': myReservations,
       'receivedReservations': receivedReservations,
       'userType': userType.name,
@@ -54,13 +57,18 @@ class AppUser {
           ? (map['myWarehouses'] as List)
           .map((e) => MyWarehouse.fromMap(Map<String, dynamic>.from(e)))
           .toList()
-          : null,
+          : [],
+      usingSpaces: map['usingWarehouses'] != null
+          ? (map['usingWarehouses'] as List)
+          .map((e) => UsingSpace.fromMap(Map<String, dynamic>.from(e)))
+          .toList()
+          : [],
       myReservations: map['myReservations'] != null
           ? List<String>.from(map['myReservations'])
-          : null,
+          : [],
       receivedReservations: map['receivedReservations'] != null
           ? List<String>.from(map['receivedReservations'])
-          : null,
+          : [],
     );
   }
 
@@ -89,8 +97,6 @@ class AppUser {
     );
   }
 }
-
-
 
 class MyWarehouse {
   final String locationId;
@@ -122,6 +128,46 @@ class MyWarehouse {
     return MyWarehouse(
       locationId: locationId ?? this.locationId,
       warehouseId: warehouseId ?? this.warehouseId,
+    );
+  }
+}
+
+class UsingSpace {
+  final String locationId;
+  final String warehouseId;
+  final String spaceId;
+
+  UsingSpace({
+    required this.locationId,
+    required this.warehouseId,
+    required this.spaceId,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'locationId': locationId,
+      'warehouseId': warehouseId,
+      'spaceId': spaceId,
+    };
+  }
+
+  factory UsingSpace.fromMap(Map<String, dynamic> map) {
+    return UsingSpace(
+      locationId: map['locationId'],
+      warehouseId: map['warehouseId'],
+      spaceId: map['spaceId'],
+    );
+  }
+
+  UsingSpace copyWith({
+    String? locationId,
+    String? warehouseId,
+    String? spaceId,
+  }) {
+    return UsingSpace(
+      locationId: locationId ?? this.locationId,
+      warehouseId: warehouseId ?? this.warehouseId,
+      spaceId: spaceId ?? this.spaceId,
     );
   }
 }
