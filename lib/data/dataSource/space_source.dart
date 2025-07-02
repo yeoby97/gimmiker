@@ -44,4 +44,15 @@ class SpaceSource{
         .doc(space.id)
         .update(space.toMap());
   }
+  Future<Space> getSpace(String locationId,String warehouseId,String spaceId) async {
+    final snapshot = await _firestore
+        .collection('locations')
+        .doc(locationId)
+        .collection('warehouses')
+        .doc(warehouseId)
+        .collection('containers')
+        .doc(spaceId)
+        .get();
+    return Space.fromDoc(snapshot);
+  }
 }

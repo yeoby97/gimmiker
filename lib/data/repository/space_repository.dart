@@ -20,4 +20,7 @@ class SpaceRepository{
   Future<void> updateSpace(Warehouse warehouse, Space space) async {
     await _spaceSource.updateSpace(warehouse,space);
   }
+  Future<Space> getSpace(String locationId,String warehouseId,String spaceId) async {
+    return _spaceSource.getSpace(locationId,warehouseId,spaceId);
+  }
 }

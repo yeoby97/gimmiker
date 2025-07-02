@@ -1,4 +1,8 @@
 
+import 'package:gimmiker/data/model/location.dart';
+import 'package:gimmiker/data/model/space.dart';
+import 'package:gimmiker/data/model/warehouse.dart';
+
 enum UserType{user,manager}
 
 class AppUser {
@@ -133,6 +137,7 @@ class MyWarehouse {
 }
 
 class UsingSpace {
+
   final String locationId;
   final String warehouseId;
   final String spaceId;
@@ -170,4 +175,14 @@ class UsingSpace {
       spaceId: spaceId ?? this.spaceId,
     );
   }
+}
+
+class UsingSpaceData{
+  final Warehouse warehouse;
+  final Space space;
+
+  UsingSpaceData({
+    required this.warehouse,
+    required this.space,
+  });
 }

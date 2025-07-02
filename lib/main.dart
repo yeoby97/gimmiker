@@ -8,6 +8,8 @@ import 'package:provider/provider.dart';
 import 'features/home/bottom_sheet/bottom_sheet_provider.dart';
 import 'features/main/main_provider.dart';
 import 'features/main/main_screen.dart';
+import 'features/my_reservation/my_reservation_provider.dart';
+import 'features/my_using_space/my_using_space_provider.dart';
 import 'features/my_warehouse/my_warehouse_provider.dart';
 import 'firebase_options.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -30,6 +32,8 @@ void main() async{
         ChangeNotifierProvider(create: (_) => HomeProvider()),
         ChangeNotifierProvider(create: (_) => BottomSheetProvider()),
         ChangeNotifierProvider(create: (_) => MyWarehouseProvider()),
+        ChangeNotifierProvider(create: (_) => MyUsingSpaceProvider()),
+        ChangeNotifierProvider(create: (_) => MyReservationProvider()),
       ],
     child: MyApp()
     ),

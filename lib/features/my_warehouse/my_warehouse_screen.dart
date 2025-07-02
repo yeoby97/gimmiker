@@ -19,7 +19,6 @@ class MyWarehouseScreen extends StatefulWidget {
 
 class _MyWarehouseScreenState extends State<MyWarehouseScreen> {
 
-
   @override
   void initState() {
     // TODO: implement initState

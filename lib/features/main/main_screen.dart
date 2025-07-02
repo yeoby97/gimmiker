@@ -5,6 +5,8 @@ import 'package:gimmiker/features/manager_warehouse_management/manager_warehouse
 import 'package:provider/provider.dart';
 import '../../data/model/user.dart';
 import '../home/home_screen.dart';
+import '../my_reservation/my_reservation_screen.dart';
+import '../my_using_space/my_using_space_screen.dart';
 import '../my_warehouse/my_warehouse_screen.dart';
 
 class MainScreen extends StatelessWidget {
@@ -37,8 +39,8 @@ class _Body extends StatelessWidget {
     return switch (homeScreenViewModel.currentIndex) {
       0 => const HomeScreen(),
       1 => const MyWarehouseScreen(),
-      2 => const Center(child: Text('예약현황')),
-      3 => const Center(child: Text('예약현황')),
+      2 => const MyReservationScreen(),
+      3 => const MyUsingSpaceScreen(),
       4 => const Center(child: Text('내 정보')),
       5 => const ManagerWarehouseManagementScreen(),
       _ => const Center(child: Text('오류')),
