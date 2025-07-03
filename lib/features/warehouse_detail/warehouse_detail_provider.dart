@@ -41,7 +41,7 @@ class WarehouseDetailProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  int? _selectedMonths;
+  int? _selectedMonths = 1;
   int? get selectedMonths => _selectedMonths;
   set selectedDate(DateTime? value) {
     _selectedDate = value;

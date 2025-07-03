@@ -20,6 +20,7 @@ class MyUsingSpaceProvider extends ChangeNotifier{
 
   Future<void> init(BuildContext context) async{
     _setLoading(true);
+    _usingSpaces.clear();
 
     final AppUser user = context.read<MainProvider>().currentUser!;
 

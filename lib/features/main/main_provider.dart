@@ -48,7 +48,7 @@ class MainProvider extends ChangeNotifier {
     _userSubscription?.cancel();
     _userSubscription = _userRepository.getCurrentUserStream().listen((user) {
       _user = user;
-      notifyListeners();
+      print(user?.uid);
     });
   }
 

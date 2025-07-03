@@ -83,6 +83,7 @@ class AppUser {
     String? photoURL,
     bool? advertisement,
     List<MyWarehouse>? myWarehouses,
+    List<UsingSpace>? usingSpaces,
     List<String>? myReservations,
     List<String>? receivedReservations,
     UserType? userType,
@@ -96,6 +97,7 @@ class AppUser {
       advertisement: advertisement ?? this.advertisement,
       myWarehouses: myWarehouses ?? this.myWarehouses,
       myReservations: myReservations ?? this.myReservations,
+      usingSpaces: usingSpaces ?? this.usingSpaces,
       receivedReservations: receivedReservations ?? this.receivedReservations,
       userType: userType ?? this.userType,
     );

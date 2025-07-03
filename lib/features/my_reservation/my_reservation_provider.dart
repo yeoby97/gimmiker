@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../data/dataSource/reservation_source.dart';
 import '../../data/dataSource/space_source.dart';
 import '../../data/dataSource/user_source.dart';
@@ -19,8 +18,7 @@ class MyReservationProvider extends ChangeNotifier{
   final userRepository = UserRepository(UserSource());
   final spaceRepository = SpaceRepository(SpaceSource());
 
-
-  late final List<Reservation> _reservations;
+  late List<Reservation> _reservations;
   final List<ReservationData> _reservationData = [];
   List<ReservationData> get reservationData => _reservationData;
 
@@ -36,14 +34,12 @@ class MyReservationProvider extends ChangeNotifier{
 
     final user = context.read<MainProvider>().currentUser;
     _reservationData.clear();
-    _reservationData.clear();
     _reservations = await reservationRepository.getAllReservations(user!.myReservations);
 
     for(final reservation in _reservations){
 
       final warehouse = await warehouseRepository.getWarehouse(reservation.locationId, reservation.warehouseId);
       final space = await spaceRepository.getSpace(reservation.locationId, reservation.warehouseId, reservation.spaceId);
-      final user = context.read<MainProvider>().currentUser!;
       final owner = await userRepository.getUser(reservation.ownerId);
 
       reservationData.add(ReservationData(
@@ -57,6 +53,7 @@ class MyReservationProvider extends ChangeNotifier{
         createdAt: reservation.createdAt,
       ));
     }
+
     isLoading = false;
   }
 }
